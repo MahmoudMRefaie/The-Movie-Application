@@ -36,5 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.okhttp:okhttp:20120626'
     implementation("com.squareup.okhttp3:okhttp:4.5.0")
+    implementation 'com.android.support:cardview-v7:29.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
 }

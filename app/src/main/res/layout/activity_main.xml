@@ -7,14 +7,11 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
     <GridView
         android:id="@+id/all_movies"
         android:layout_width="match_parent"
-        android:layout_height="354dp"/>
+        android:layout_height="match_parent"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
+
 </LinearLayout>

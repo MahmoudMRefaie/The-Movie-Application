@@ -1,77 +1,94 @@
 package com.mahmoudrefaie.themovieapplication
 
+
+import android.app.ProgressDialog
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.mahmoudrefaie.themovieapplication.JSON.MyAdapter
+import com.mahmoudrefaie.themovieapplication.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONObject
-import java.io.BufferedInputStream
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import org.json.JSONArray
+import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
+
+
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MyAsyncTaskGetMovies().execute()
+        var api_key = "a5956e11fc7cf87dd184b612e36ca190"
+        var movie_id = "3"
+        val myUrl =
+            "https://api.themoviedb.org/3/movie/$movie_id?api_key=$api_key&language=en-US"
+
+        AsyncTaskHandler().execute(myUrl)
     }
 
-    internal inner class MyAsyncTaskGetMovies : AsyncTask<Void,Void, String>() {
+    inner class AsyncTaskHandler : AsyncTask<String, String, String>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
+            progressDialog = ProgressDialog(this@MainActivity)
+            progressDialog.setMessage("Please Wait ...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+
         }
 
-        override fun doInBackground(vararg p0: Void?): String {
+        override fun doInBackground(vararg url: String?): String {
+            /*var response = URL(url[0]).readText()
+            var gson = Gson()
 
-            var api_key = "a5956e11fc7cf87dd184b612e36ca190"
-            var movie_id = 1
-            while(true) {
-                movie_id.toString()
-                val myUrl =
-                    "https://api.themoviedb.org/3/movie/$movie_id?api_key=$api_key&language=en-US"
-                val url = URL(myUrl)
-                val httpClient = url.openConnection() as HttpURLConnection
-                if (httpClient.responseCode == HttpURLConnection.HTTP_OK) {
-                    try {
-                        val stream = BufferedInputStream(httpClient.inputStream)
-                        val data: String = readStream(inputStream = stream)
-                        return data
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    } finally {
-                        httpClient.disconnect()
-                    }
-                } else {
-                    println("ERROR ${httpClient.responseCode}")
-                }
-                movie_id++
-                return ""
+            val myData = gson.fromJson(response,Array<Response>::class.java).toString()
+
+            return myData*/
+            var res: String
+            val connection = URL(url[0]).openConnection() as HttpURLConnection
+            try {
+                connection.connect()
+                res = connection.inputStream.use { it.reader().use { reader -> reader.readText() } }
+            } finally {
+                connection.disconnect()
             }
-        }
-        fun readStream(inputStream: BufferedInputStream): String {
-            val bufferedReader = BufferedReader(InputStreamReader(inputStream))
-            val stringBuilder = StringBuilder()
-            bufferedReader.forEachLine { stringBuilder.append(it) }
-            return stringBuilder.toString()
+            return res
         }
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            try {
-                var root = JSONObject(result)
-                var title = root.getString("title")
-                text.text = title
-            }catch(ex : Exception){
-                ex.printStackTrace()
+
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss()
+                jsonResult(result)
             }
         }
 
+        private fun jsonResult(jsonString: String?) {
+            val jsonArray = JSONArray(jsonString)
+            val myGrid = ArrayList<Movie>()
+            var i = 0
+            while (i < jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                myGrid.add(
+                    Movie(
+                        jsonObject.getString("title"),
+                        jsonObject.getString("overview"),
+                        jsonObject.getString("original_language"),
+                        jsonObject.getString("popularity"),
+                        jsonObject.getString("release_date")
+                    )
+                )
+                i++
+            }
+            val adapter = MyAdapter(this@MainActivity, myGrid)
+            all_movies.adapter = adapter
+        }
     }
 }
