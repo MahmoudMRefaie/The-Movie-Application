@@ -32,16 +32,16 @@ class MainActivity : AppCompatActivity() , AdapterView.OnItemClickListener{
 //        var page = 1
 //        var region = "EG"
 
-        var call:Call<ArrayList<Movie>> = RetrofitClient().getMovieNameApi()!!.getMoviesName()
-        call.enqueue(object : Callback<ArrayList<Movie>>{
-            override fun onFailure(call: Call<ArrayList<Movie>>, t: Throwable) {
+        var call:Call<List<Movie>> = RetrofitClient().getMovieNameApi()!!.getMoviesName("")
+        call.enqueue(object : Callback<List<Movie>>{
+            override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
                 Toast.makeText(applicationContext,"OnFailure : "+t.message,Toast.LENGTH_LONG).show()
                 Log.e("onFailure : ",t.message)
             }
 
             override fun onResponse(
-                call: Call<ArrayList<Movie>>,
-                response: Response<ArrayList<Movie>>
+                call: Call<List<Movie>>,
+                response: Response<List<Movie>>
             ) {
                 if(response.isSuccessful){
                     movieNameAdapter = MovieNameAdapter(this@MainActivity,response.body()!!)

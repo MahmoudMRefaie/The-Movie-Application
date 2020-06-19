@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.mahmoudrefaie.themovieapplication.R
 import com.mahmoudrefaie.themovieapplication.model.Movie
 
-class MovieNameAdapter(val context: Context, val grid : ArrayList<Movie>) : BaseAdapter() {
+class MovieNameAdapter(val context: Context, val grid : List<Movie>) : BaseAdapter() {
 
 
     override fun getView(p0: Int, p1: View?, parent: ViewGroup?): View {
