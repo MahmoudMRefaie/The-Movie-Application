@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie Name"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/movieId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie ID"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:layout_below="@+id/movieTitle"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/movieLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie Language"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:layout_below="@+id/movieId"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/movieOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie Overview"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:layout_below="@+id/movieLanguage"/>
+    </RelativeLayout>
+
+</RelativeLayout>
