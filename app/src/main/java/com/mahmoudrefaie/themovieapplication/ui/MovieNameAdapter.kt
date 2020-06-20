@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.mahmoudrefaie.themovieapplication.R
-import com.mahmoudrefaie.themovieapplication.model.Movie
+import com.mahmoudrefaie.themovieapplication.model.MovieItem
+import kotlinx.android.synthetic.main.movie_name_item.view.*
 
-class MovieNameAdapter(val context: Context, val grid : List<Movie>) : BaseAdapter() {
+class MovieNameAdapter(val context: Context, val grid : List<MovieItem>) : BaseAdapter() {
 
+    override fun getView(position: Int, p1: View?, parent: ViewGroup?): View {
 
-    override fun getView(p0: Int, p1: View?, parent: ViewGroup?): View {
         val view:View = LayoutInflater.from(context).inflate(R.layout.movie_name_item,parent,false)
 
         val movie_name = view.findViewById<TextView>(R.id.movie_name)
@@ -21,30 +22,26 @@ class MovieNameAdapter(val context: Context, val grid : List<Movie>) : BaseAdapt
         val popularity = view.findViewById<TextView>(R.id.popularity)
         val release_date = view.findViewById<TextView>(R.id.release_date)*/
 
-        var listItem : Movie = grid.get(p0)
+        var listItem : MovieItem = grid.get(position)
 
-        movie_name.text = grid.get(p0).title
+        movie_name.text = listItem.title
         /*overview.text = grid[p0].overview
         original_language.text = grid[p0].original_language
         popularity.text = grid[p0].popularity
         release_date.text = grid[p0].release_date*/
 
-
-
         return view
     }
 
-    override fun getItem(p0: Int): Any {
-        return grid.get(p0)
+    override fun getItem(position: Int): Any {
+        return grid.get(position)
     }
 
-    override fun getItemId(p0: Int): Long {
-        return p0.toLong()
-
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun getCount(): Int {
         return grid.size
     }
-
 }

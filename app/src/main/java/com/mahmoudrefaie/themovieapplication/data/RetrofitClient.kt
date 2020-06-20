@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 public class RetrofitClient {
-    private var BASE_URL = "https://api.themoviedb.org/3/movie/"
+    private var BASE_URL = "https://api.themoviedb.org/3/"
     private var retrofit : Retrofit ? = null
 
     fun getClient() : Retrofit {
