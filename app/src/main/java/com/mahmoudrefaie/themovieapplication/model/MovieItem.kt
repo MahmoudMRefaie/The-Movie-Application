@@ -10,5 +10,7 @@ data class MovieItem(
     @SerializedName("id")
     var id:Int?=0,
     @SerializedName("original_language")
-    var originalLanguage:String?=null
+    var originalLanguage:String?=null,
+    @SerializedName("poster_path")
+    var posterPath:String?=null
 )

@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val api_key = "a5956e11fc7cf87dd184b612e36ca190"
+        val id = 3
+
         progressBar = findViewById(R.id.progress_circular)
         gridView = findViewById(R.id.all_movies)
 
-        var call:Call<MovieResponse> = RetrofitClient().getMovieNameApi()!!.getMoviesName(api_key)
+        var call:Call<MovieResponse> = RetrofitClient().getMovieNameApi()!!.getMoviesName(id,api_key)
         call.enqueue(object : Callback<MovieResponse>{
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 Toast.makeText(applicationContext,"OnFailure : "+t.message,Toast.LENGTH_LONG).show()
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                             extras.putInt("id_key", allData!!.get(position).id!!)
                             extras.putString("originalLanguage_key", allData!!.get(position).originalLanguage)
                             extras.putString("overview_key", allData!!.get(position).overview)
+                            extras.putString("posterPath_key", allData!!.get(position).posterPath)
 
                             var intent = Intent(applicationContext, MovieDetails::class.java)
                             intent.putExtras(extras)
