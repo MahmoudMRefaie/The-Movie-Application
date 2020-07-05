@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">The Movie Application</string>
+
+    <string name="movie_name">Movie Name</string>
+    <string name="movie_overview">Movie Overview</string>
+    <string name="data_released_TV">Data Released : </string>
+    <string name="data_released_result">Movie Data Released</string>
+    <string name="language_TV">Language : </string>
+    <string name="language_result">Movie Language</string>
+    <string name="vote_TV">Vote : </string>
+    <string name="vote_result">Movie Vote</string>
+    <string name="for_adult_TV">For adult : </string>
+    <string name="for_adult_result">Yes/No</string>
 </resources>

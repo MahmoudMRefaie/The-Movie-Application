@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">الأفلام</string>
+
+    <string name="movie_name">اسم الفيلم</string>
+    <string name="movie_overview">نبذة عن الفيلم</string>
+    <string name="data_released_TV">تاريخ الاصدار : </string>
+    <string name="data_released_result">تاريخ الإصدار</string>
+    <string name="language_TV">اللغة : </string>
+    <string name="language_result">اللغة</string>
+    <string name="vote_TV">التصويت : </string>
+    <string name="vote_result">التصويت</string>
+    <string name="for_adult_TV">للبالغين : </string>
+    <string name="for_adult_result">نعم/لا</string>
+</resources>

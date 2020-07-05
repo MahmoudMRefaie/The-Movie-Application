@@ -7,10 +7,15 @@ data class MovieItem(
     var title:String?=null,
     @SerializedName("overview")
     var overview:String?=null,
-    @SerializedName("id")
-    var id:Int?=0,
+    @SerializedName("release_date")
+    var releaseDate:String?=null,
     @SerializedName("original_language")
     var originalLanguage:String?=null,
     @SerializedName("poster_path")
-    var posterPath:String?=null
+    var posterPath:String?=null,
+    @SerializedName("vote_average")
+    var vote:Double?=0.0,
+    @SerializedName("adult")
+    var adult:Boolean?=false
+
 )
